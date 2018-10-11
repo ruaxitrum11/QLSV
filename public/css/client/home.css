@@ -1,0 +1,26 @@
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input::placeholder {
+    color: #dddddd;
+    font-size: 12px;
+    font-style: italic;
+}
+.user_information>li {
+    margin-bottom: 20px;
+}
+.user_information>li>label{
+    width: 15%;
+    font-weight: bold;
+}
+.user_information>li>i{
+    display: inline-block;
+    width: 5%;
+    font-style:normal!important;
+}
