@@ -8,7 +8,7 @@
 
 namespace App\Repositories\Eloquents;
 
-use App\Entites\Client;
+use App\Entities\Client;
 use App\User;
 use Illuminate\Database\Connection;
 use Illuminate\Support\Collection;

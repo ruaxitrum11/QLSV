@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\Client\ClientUpdateRequest;
-use App\Services\Client\UpdateUserServices;
-use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Session;
+use App\Http\Requests\Admin\UserUpdateRequest;
+use App\Services\Admin\UpdateUserServices;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -20,10 +18,10 @@ class UserController extends Controller
 
     public function show(int $id)
     {
-        return view('/client/edit');
+        return view('admin.edit');
     }
 
-    public function update(int $id, ClientUpdateRequest $request)
+    public function update(int $id , UserUpdateRequest $request)
     {
         $user_update = $request->all();
 //        dd($request);
@@ -31,7 +29,7 @@ class UserController extends Controller
 
         if ($user) {
             Session::flash('success', 'Cập nhật dữ liệu thành công');
-            return redirect()->route('user.show',$id);
+            return redirect()->route('admin.user.show',$id);
         } else {
             Session::flash('error', 'Cập nhật dữ liệu thất bại thất bại');
             return redirect()->back();

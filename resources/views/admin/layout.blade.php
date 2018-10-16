@@ -31,7 +31,7 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
     @if(!Auth::user()->avatar)
         <img src="/image/user/no_image.png" style="width: 50px;height: 50px;border-radius: 50%; margin-right: 20px;">
-        @else
+    @else
         <img src="/image/user/{{Auth::user()->avatar}}" style="width: 50px;height: 50px;border-radius: 50%; margin-right: 20px;">
     @endif
     <a class="navbar-brand mr-1" href="index.html">{{Auth::user()->name}}</a>
@@ -53,10 +53,10 @@
 
         <li class="nav-item dropdown no-arrow">
             {{--<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-                {{--<i class="fas fa-user-circle fa-fw"></i>--}}
+            {{--<i class="fas fa-user-circle fa-fw"></i>--}}
             {{--</a>--}}
             {{--<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">--}}
-                <a class="btn btn-primary" href="{{route('client.LogOut')}}">Đăng xuất</a>
+            <a class="btn btn-primary" href="{{route('admin.LogOut')}}">Đăng xuất</a>
             {{--</div>--}}
 
         </li>
@@ -70,30 +70,27 @@
     <ul class="sidebar navbar-nav">
         <li><img src=""></li>
         <li class="nav-item @yield('info-active')">
-            <a class="nav-link" href="{{route('client.getHome')}}">
+            <a class="nav-link" href="{{route('admin.home.show')}}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Thông tin sinh viên</span>
+                <span>Thông tin giảng viên</span>
             </a>
         </li>
         <li class="nav-item @yield('update-active')">
-            <a class="nav-link" href="{{route('user.show', Auth::user()->id)}}">
+            <a class="nav-link" href="{{route('admin.user.show', Auth::user()->id)}}">
                 <i class="fas fa-fw fa-user"></i>
                 <span>Cập nhật thông tin</span></a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="tables.html">
+        <li class="nav-item @yield('account-active')">
+            <a class="nav-link" href="{{route('admin.account.showStudent')}}">
                 <i class="fas fa-fw fa-table"></i>
-                <span>Tables</span></a>
+                <span>Quản lý tài khoản</span></a>
         </li>
     </ul>
 
     <div id="content-wrapper">
-        @if(!Auth::user())
-            @yield('login-content');
-        @else
-       @yield('content')
-       @endif
-        <!-- /.container-fluid -->
+
+    @yield('content')
+    <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
         <footer class="sticky-footer">

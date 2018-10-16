@@ -2,7 +2,7 @@
 namespace App\Repositories\Eloquents;
 
 
-use App\Entites\Client;
+use App\Entities\Client;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\User;
 use Illuminate\Database\Connection;

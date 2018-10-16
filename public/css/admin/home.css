@@ -1,0 +1,10 @@
+ol>li>a , ol>li>a:hover {
+    color: #000;
+    text-decoration: none;
+}
+.control-icon>a>i {
+    margin: 0 10px;
+    font-size: 18px;
+    color: #000;
+    text-decoration: none;
+}

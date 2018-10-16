@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Client;
+namespace App\Http\Requests\Admin;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class ClientRegister extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,17 +28,15 @@ class ClientRegister extends FormRequest
             'email' => [
                 'required',
                 'email',
-                Rule::unique('clients', 'email'),
-                Rule::unique('admins','email')
+                Rule::unique('clients', 'email')->ignore($this->route('id')),
+                Rule::unique('admins', 'email')->ignore($this->route('id'))
             ],
-            'name' => [
-                'required',
+            'phone_number' => [
+                Rule::unique('clients', 'phone_number')->ignore($this->route('id')),
+                Rule::unique('admins', 'phone_number')->ignore($this->route('id'))
             ],
-            'password' => [
-                'required',
-                'min:5',
-                'confirmed'
-            ]
+            'avatar' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
         ];
     }
     public function attributes()
@@ -46,7 +44,8 @@ class ClientRegister extends FormRequest
         return [
             'email' => 'Email',
             'name' => 'Tên người dùng',
-            'password' => 'Mật khẩu'
+            'phone_number' => 'Số điện thoại',
+            'avatar' => 'Ảnh đại diện'
         ];
     }
 }

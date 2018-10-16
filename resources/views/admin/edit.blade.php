@@ -1,7 +1,8 @@
-@extends('client/layout')
+@extends('admin/layout')
 @section('css')
     /css/client/home.css
 @endsection
+@section('update-active','active')
 @section('content')
     @if ( Session::has('success') )
         <div class="alert alert-success alert-dismissible" role="alert">
@@ -39,16 +40,16 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <span style="font-size: 16px;">Mã số sinh viên: {{ Auth::user()->number_id }}</span>
+                <span style="font-size: 16px;">Mã giảng viên: {{ Auth::user()->number_id }}</span>
             </li>
         </ol>
 
         <div class="card mb-3">
             {{--@php--}}
-                {{--dump($errors);--}}
+            {{--dump($errors);--}}
             {{--@endphp--}}
             <div class="card-body">
-                <form id="uppdate-user"  action="{{ route('user.update', Auth::id()) }}" method="post" role="form" enctype="multipart/form-data">
+                <form id="uppdate-user"  action="{{ route('admin.user.update', Auth::id()) }}" method="post" role="form" enctype="multipart/form-data">
                     <input type="hidden" name="_method" value="put">
                     {{csrf_field()}}
                     <div class="form-group">
@@ -62,7 +63,7 @@
                     <div class="form-group">
                         <label>Số điện thoại</label>
                         @if(!Auth::user()->phone_number)
-                        <input type="number" class="form-control" name="phone_number" placeholder="Nhập số điện thoại của bạn ..." id="phone-number">
+                            <input type="number" class="form-control" name="phone_number" placeholder="Nhập số điện thoại của bạn ..." id="phone-number">
                         @else
                             <input type="number" class="form-control" name="phone_number"  id="phone-number" value="0{{Auth::user()->phone_number}}">
                         @endif
@@ -92,11 +93,11 @@
                     <div class="form-group">
                         <label>Ảnh đại diện</label>
                         <input type="file" class="form-control" name="avatar" id="avatar" value="{{Auth::user()->avatar}}">
-                    @if(!Auth::user()->avatar)
-                        <img src="/image/user/no_image.png" id="image">
-                            @else
-                        <img src="/image/user/{{Auth::user()->avatar}}" id="image">
-                            @endif
+                        @if(!Auth::user()->avatar)
+                            <img src="/image/user/no_image.png" id="image">
+                        @else
+                            <img src="/image/user/{{Auth::user()->avatar}}" id="image">
+                        @endif
                     </div>
                     <div class="form-group">
                         <div class="row">

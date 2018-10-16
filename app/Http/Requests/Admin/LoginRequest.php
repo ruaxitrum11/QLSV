@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Client;
+namespace App\Http\Requests\Admin;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ClientRegister extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,17 +26,9 @@ class ClientRegister extends FormRequest
         return [
             'email' => [
                 'required',
-                'email',
-                Rule::unique('clients', 'email'),
-                Rule::unique('admins','email')
-            ],
-            'name' => [
-                'required',
             ],
             'password' => [
                 'required',
-                'min:5',
-                'confirmed'
             ]
         ];
     }
@@ -45,7 +36,6 @@ class ClientRegister extends FormRequest
     {
         return [
             'email' => 'Email',
-            'name' => 'Tên người dùng',
             'password' => 'Mật khẩu'
         ];
     }

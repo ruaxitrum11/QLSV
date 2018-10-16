@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Services\Client;
+namespace App\Services\Admin;
 
-use App\Repositories\Contracts\UpdateUserRepositoryInterface;
 
-use Illuminate\Support\Facades\Storage;
 
-class UpdateUserServices
-{
+use App\Repositories\Eloquents\Admin\UpdateUserRepository;
+
+class UpdateUserServices{
     protected $user_repository;
 
-    public function __construct(UpdateUserRepositoryInterface $user_repository)
+    public function __construct(UpdateUserRepository $user_repository)
     {
         $this->userRepository = $user_repository;
     }
@@ -20,7 +19,7 @@ class UpdateUserServices
 //        dd($request);
         if (isset($request['avatar'])) {
             $avatar = $request['avatar'];
-
+//            dd($avatar);
 
             $getAvatar = time().'_'.$avatar->getClientOriginalName();
             $destinationPath = public_path('image/user');
@@ -55,5 +54,4 @@ class UpdateUserServices
 
         return $result;
     }
-
 }

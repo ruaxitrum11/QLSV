@@ -28,11 +28,15 @@ class ClientUpdateRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                Rule::unique('clients', 'email')->ignore($this->route('id'))
+                Rule::unique('clients', 'email')->ignore($this->route('id')),
+                Rule::unique('admins', 'email')->ignore($this->route('id'))
             ],
             'phone_number' => [
-                Rule::unique('clients', 'phone_number')->ignore($this->route('id'))
-            ]
+                Rule::unique('clients', 'phone_number')->ignore($this->route('id')),
+                Rule::unique('admins', 'phone_number')->ignore($this->route('id'))
+            ],
+            'avatar' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
         ];
     }
     public function attributes()
@@ -40,7 +44,8 @@ class ClientUpdateRequest extends FormRequest
         return [
             'email' => 'Email',
             'name' => 'Tên người dùng',
-            'phone_number' => 'Số điện thoại'
+            'phone_number' => 'Số điện thoại',
+            'avatar' => 'Ảnh đại diện'
         ];
     }
 }

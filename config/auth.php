@@ -45,6 +45,10 @@ return [
             'driver' => 'session',
             'provider' => 'clients',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
 
         'api' => [
             'driver' => 'token',
@@ -77,9 +81,12 @@ return [
 
         'clients' => [
             'driver' => 'eloquent',
-            'model' => \App\Entites\Client::class,
+            'model' => \App\Entities\Client::class,
         ],
-
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => \App\Entities\Admin::class,
+        ]
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

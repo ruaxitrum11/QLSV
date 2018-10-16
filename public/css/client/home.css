@@ -24,3 +24,9 @@ input::placeholder {
     width: 5%;
     font-style:normal!important;
 }
+#image {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    margin-top: 20px;
+}

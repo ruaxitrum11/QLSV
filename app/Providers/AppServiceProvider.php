@@ -33,5 +33,10 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Eloquents\UpdateUserRepository'
         );
 
+//        $this->app->bind(
+//            'App\Repositories\Contracts\UpdateUserRepositoryInterface',
+//            'App\Repositories\Eloquents\Admin\UpdateUserRepository'
+//        );
+
     }
 }
