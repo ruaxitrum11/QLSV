@@ -29,7 +29,26 @@ Route::group(['middleware'=>'auth:admin'],function (){
 
     //====================End User================
 
-    Route::get('/account','Admin\AccountController@showStudent')->name('admin.account.showStudent');
+    //====================Account========================
+
+    Route::get('/accountS','Admin\AccountController@showStudent')->name('admin.account.showStudent');
+    Route::get('/accountT','Admin\AccountController@showTeacher')->name('admin.account.showTeacher');
+    Route::post('/account/add','Admin\AccountController@add')->name('admin.account.add');
+
+    //=====================Client======================
+    Route::get('/account/info_client/{id}','Admin\AccountController@infoClient')->name('admin.account.info_client');
+    Route::get('/account/update_client/{id}','Admin\AccountController@showUpdateClient')->name('admin.account.show_update_client');
+    Route::put('/account/update_client/{id}','Admin\AccountController@updateClient')->name('admin.account.update_client');
+    Route::delete('/account/delete_client/{id}','Admin\AccountController@deleteClient')->name('admin.account.delete_client');
+    //=====================End Client==================
+
+    //=====================Admin======================
+    Route::get('/account/info_admin/{id}','Admin\AccountController@infoAdmin')->name('admin.account.info_admin');
+    Route::get('/account/update_admin/{id}','Admin\AccountController@showUpdateAdmin')->name('admin.account.show_update_admin');
+    Route::put('/account/update_admin/{id}','Admin\AccountController@updateAdmin')->name('admin.account.update_admin');
+    Route::delete('/account/delete_admin/{id}','Admin\AccountController@deleteAdmin')->name('admin.account.delete_admin');
+    //=====================End Admin======================
 
 
+    //====================End Account================
 });

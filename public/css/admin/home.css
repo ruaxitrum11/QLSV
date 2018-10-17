@@ -8,3 +8,23 @@ ol>li>a , ol>li>a:hover {
     color: #000;
     text-decoration: none;
 }
+.button-add{
+    margin-bottom: 20px;
+}
+.button-add>button{
+    display: inline-block;
+    padding: 10px 25px;
+    background: #007bff;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.button-add>button:focus{
+    border: none;
+    outline: none;
+}
+input[type=radio]:focus{
+    outline: none;
+}

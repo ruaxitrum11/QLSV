@@ -2,7 +2,7 @@
 @section('css')
     /css/client/home.css
 @endsection
-@section('update-active','active')
+@section('account-active','active')
 @section('content')
     @if ( Session::has('success') )
         <div class="alert alert-success alert-dismissible" role="alert">
@@ -39,8 +39,8 @@
 
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <span style="font-size: 16px;">Mã giảng viên: {{ Auth::user()->number_id }}</span>
+            <li>
+                <span style="font-size: 16px;">Thông tin sinh viên: <span style="font-size: 20px;margin-left: 20px;text-transform: capitalize">{{$update_client->name}}</span></span>
             </li>
         </ol>
 
@@ -49,43 +49,41 @@
             {{--dump($errors);--}}
             {{--@endphp--}}
             <div class="card-body">
-                <form id="uppdate-user"  action="{{ route('admin.user.update', Auth::id()) }}" method="post" role="form" enctype="multipart/form-data">
+                <form id="uppdate-user"  action="{{route('admin.account.update_client',$update_client->id)}}" method="post" role="form" enctype="multipart/form-data">
                     <input type="hidden" name="_method" value="put">
                     {{csrf_field()}}
                     <div class="form-group">
+                        <label>Tên đầy đủ</label>
+                        <input type="text" class="form-control" name="name" id="name" value="{{$update_client->name}}">
+                    </div>
+                    <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control" name="email" id="email" value="{{ Auth::user()->email }}">
+                        <input type="email" class="form-control" name="email" id="email" value="{{$update_client->email}}">
                     </div>
                     <div class="form-group">
                         <label>Địa chỉ</label>
-                        @if(!Auth::user()->address)
-                        <input type="text" class="form-control" name="address" id="address" placeholder="Nhập địa chỉ của bạn ...">
+                        @if(!$update_client->address)
+                            <input type="text" class="form-control" name="address" id="address" placeholder="Nhập địa chỉ  ...">
                         @else
-                            <input type="text" class="form-control" name="address" id="address" value="{{Auth::user()->address}}">
-                            @endif
+                            <input type="text" class="form-control" name="address" id="address" value="{{$update_client->address}}">
+                        @endif
                     </div>
                     <div class="form-group">
                         <label>Số điện thoại</label>
-                        @if(!Auth::user()->phone_number)
-                            <input type="number" class="form-control" name="phone_number" placeholder="Nhập số điện thoại của bạn ..." id="phone-number">
+                        @if(!$update_client->phone_number)
+                            <input type="number" class="form-control" name="phone_number" placeholder="Nhập số điện thoại ..." id="phone-number">
                         @else
-                            <input type="number" class="form-control" name="phone_number"  id="phone-number" value="0{{Auth::user()->phone_number}}">
+                            <input type="number" class="form-control" name="phone_number"  id="phone-number" value="0{{$update_client->phone_number}}">
                         @endif
                     </div>
                     <div class="form-group">
                         <label>Năm sinh</label>
-                        {{--@php--}}
-                        {{--use Carbon\Carbon;--}}
-                        {{--$date = Carbon::parse(Auth::user()->birthday)->format('d/m/Y');--}}
-
-                        {{--@endphp--}}
-
-                        <input type="date" class="form-control" name="birthday" id="birthday" value="{{ Auth::user()->birthday }}">
+                        <input type="date" class="form-control" name="birthday" id="birthday" value="{{$update_client->birthday}}">
                     </div>
                     <div class="form-group">
                         <label>Giới tính</label>
                         <select class="form-control" id="gender" name="gender">
-                            @if(Auth::user()->gender == 1)
+                            @if($update_client->gender == 1)
                                 <option value="1">Nam</option>
                                 <option value="2">Nữ</option>
                             @else
@@ -96,11 +94,11 @@
                     </div>
                     <div class="form-group">
                         <label>Ảnh đại diện</label>
-                        <input type="file" class="form-control" name="avatar" id="avatar" value="{{Auth::user()->avatar}}">
-                        @if(!Auth::user()->avatar)
+                        <input type="file" class="form-control" name="avatar" id="avatar" value="">
+                        @if(!$update_client->avatar)
                             <img src="/image/user/no_image.png" id="image">
                         @else
-                            <img src="/image/user/{{Auth::user()->avatar}}" id="image">
+                            <img src="/image/user/{{$update_client->avatar}}" id="image">
                         @endif
                     </div>
                     <div class="form-group">
@@ -113,10 +111,10 @@
 
                 </form>
             </div>
+
         </div>
-    </div>
-@endsection
-@section('script')
-    /js/client/home.js
+        @endsection
+        @section('script')
+            /js/admin/home.js
 @endsection
 

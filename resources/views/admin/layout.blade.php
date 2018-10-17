@@ -34,7 +34,7 @@
     @else
         <img src="/image/user/{{Auth::user()->avatar}}" style="width: 50px;height: 50px;border-radius: 50%; margin-right: 20px;">
     @endif
-    <a class="navbar-brand mr-1" href="index.html">{{Auth::user()->name}}</a>
+    <a class="navbar-brand mr-1" href="{{route('admin.home.show')}}">{{Auth::user()->name}}</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>

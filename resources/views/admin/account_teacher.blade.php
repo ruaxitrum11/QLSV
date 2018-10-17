@@ -39,10 +39,10 @@
 
         <!-- Breadcrumbs-->
         <ol class="breadcrumb" style="padding: 0!important;">
-            <li style="width: 50%;text-align: center;padding: 20px 0;background: #ddd!important;">
+            <li style="width: 50%;text-align: center;padding: 20px 0;">
                 <a href="{{route('admin.account.showStudent')}}" style="font-size: 16px;">Danh sách tài khoản sinh viên</a>
             </li>
-            <li style="width: 50%;text-align: center;padding: 20px 0">
+            <li style="width: 50%;text-align: center;padding: 20px 0;background: #ddd!important;">
                 <a href="{{route('admin.account.showTeacher')}}" style="font-size: 16px;">Danh sách tài khoản giảng viên</a>
             </li>
         </ol>
@@ -86,14 +86,14 @@
             {{--@php--}}
             {{--dump($errors);--}}
             {{--@endphp--}}
-            @if(!$client)
-               <p style="margin: 20px 0 20px 30px;">Danh sách tài khoản trống !</p>
-                @else
+            @if(!$admin)
+                <p style="margin: 20px 0 20px 30px;">Danh sách tài khoản trống !</p>
+            @else
                 <table class="table table-striped" style="text-align: center;margin: 0!important;">
                     <thead>
                     <tr>
-                        <th>Mã sinh viên</th>
-                        <th>Tên sinh viên</th>
+                        <th>Mã giảng viên</th>
+                        <th>Tên giảng viên</th>
                         <th>Hỉnh ảnh</th>
                         <th>Email</th>
                         <th>Xử lý</th>
@@ -101,7 +101,7 @@
                     </thead>
                     <tbody>
                     {{--{{$client}}--}}
-                    @foreach($client as $item)
+                    @foreach($admin as $item)
                         <tr>
                             <td>{{$item->number_id}}</td>
                             <td>{{$item->name}}</td>
@@ -112,9 +112,10 @@
                             @endif
                             <td>{{$item->email}}</td>
                             <td class="control-icon">
-                                <a href="{{ route('admin.account.info_client' , $item->id) }}"><i class="fas fa-info-circle" title="Xem chi tiết"></i></a>
-                                <a href="{{ route('admin.account.show_update_client', $item->id) }}"><i class="fas fa-pen" title="Sửa"></i></a>
-                                <a data-toggle="modal" data-target="#exampleModal{{$item->id}}" style="cursor: pointer"><i class="fas fa-trash" title="Xóa"></i></a>
+                                <a href="{{route('admin.account.info_admin',$item->id)}}"><i class="fas fa-info-circle" title="Xem chi tiết"></i></a>
+                                <a href="{{route('admin.account.show_update_admin',$item->id)}}"><i class="fas fa-pen" title="Sửa"></i></a>
+                                <a class="delete_account" data-toggle="modal" data-target="#exampleModal{{$item->id}}" data-name="{{$item->name}}" data-id="{{$item->id}}" style="cursor: pointer"><i class="fas fa-trash" title="Xóa"></i></a>
+                                {{--@include('modal-confirm', ['item_id' => $item->id])--}}
                                 <div class="modal fade" id="exampleModal{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -125,28 +126,27 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <span class="alert alert-danger">Bạn có chắc muốn xóa tài khoản người dùng: {{$item->name}}</span>
+                                                <span class="alert alert-danger">Bạn có chắc muốn xóa tài khoản quản trị: {{ $item->name }}</span>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
-                                                <form method="post" action="{{route('admin.account.delete_client' , $item->id) }}">
+                                                <form method="post" action="{{route('admin.account.delete_admin' , $item->id) }}">
                                                     {{csrf_field()}}
                                                     <input type="hidden" name="_method" value="delete">
-                                                <button type="submit" class="btn btn-primary">Xác nhận</button>
+                                                    <button type="submit" class="btn btn-primary">Xác nhận</button>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
-                @endif
+            @endif
         </div>
-        <div class="paginate" style="display: flex;justify-content: center;">{{$client}}</div>
+        <div class="paginate" style="display: flex;justify-content: center;">{{$admin}}</div>
     </div>
 @endsection
 @section('script')
