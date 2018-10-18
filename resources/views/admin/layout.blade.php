@@ -85,6 +85,11 @@
                 <i class="fas fa-fw fa-table"></i>
                 <span>Quản lý tài khoản</span></a>
         </li>
+        <li class="nav-item @yield('score-active')">
+            <a class="nav-link" href="{{route('admin.score.info')}}">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Quản lý điểm</span></a>
+        </li>
     </ul>
 
     <div id="content-wrapper">

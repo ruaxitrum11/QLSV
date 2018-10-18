@@ -51,4 +51,16 @@ Route::group(['middleware'=>'auth:admin'],function (){
 
 
     //====================End Account================
+
+    //====================Score========================
+
+    //=====================Admin======================
+    Route::get('/score/info','Admin\ScoreController@info')->name('admin.score.info');
+    Route::get('/score/info/{id}','Admin\ScoreController@showUpdate')->name('admin.score.showUpdate');
+    Route::put('/score/info/{id}','Admin\ScoreController@update')->name('admin.score.update');
+
+
+    //====================End Score========================
+
+
 });

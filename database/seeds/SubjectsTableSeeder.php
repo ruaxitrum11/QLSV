@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class SubjectsTableSeeder extends Seeder
 {
@@ -13,9 +14,9 @@ class SubjectsTableSeeder extends Seeder
     {
 
         DB::table('subjects')->insert([
-            ['name' => 'Toán'],
-            ['name' => 'Lý'],
-            ['name' => 'Hóa']
+            ['name' => 'Toán','created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['name' => 'Lý','created_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['name' => 'Hóa','created_at' => Carbon::now()->format('Y-m-d H:i:s')]
         ]);
     }
 }

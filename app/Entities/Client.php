@@ -27,4 +27,13 @@ class Client extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function subjects()
+    {
+        return $this->belongsToMany('App\Entities\Subject')
+            ->withPivot('id', 'score')
+            ->withTimestamps();
+    }
+
 }

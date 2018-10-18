@@ -28,3 +28,19 @@ ol>li>a , ol>li>a:hover {
 input[type=radio]:focus{
     outline: none;
 }
+input::placeholder {
+    color: #dddddd;
+    font-size: 12px;
+    font-style: italic;
+}
+#image {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    margin-top: 20px;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

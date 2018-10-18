@@ -68,7 +68,7 @@ UpdateAccountClientServices $update_account_client_services , UpdateAccountAdmin
     {
 //        dd($id);
         $info_client = Client::find($id);
-//        dd($info_client);
+//        dd($info_client->subjects);
         return view('admin.info_client')->with('info_client' , $info_client);
     }
 
