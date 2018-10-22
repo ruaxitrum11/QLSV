@@ -36,7 +36,7 @@ class UpdateUserServices{
                 'phone_number' => $request['phone_number'],
                 'birthday' => $request['birthday'],
                 'gender' => $request['gender'],
-                'avatar' => $getAvatar
+                'avatar' => $getAvatar,
             ];
         } else {
             $user_update = [

@@ -13,6 +13,7 @@ use App\Services\Admin\UpdateAccountAdminServices;
 use App\Services\Admin\UpdateAccountClientServices;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class AccountController extends Controller
@@ -22,8 +23,8 @@ class AccountController extends Controller
     protected $update_account_client_services;
     protected $update_account_admin_services;
 
-    public function __construct(AddAccountAdminServices $account_admin_services , AddAccountClientServices $account_client_services ,
-UpdateAccountClientServices $update_account_client_services , UpdateAccountAdminServices $update_account_admin_services)
+    public function __construct(AddAccountAdminServices $account_admin_services, AddAccountClientServices $account_client_services,
+                                UpdateAccountClientServices $update_account_client_services, UpdateAccountAdminServices $update_account_admin_services)
     {
         $this->account_admin_services = $account_admin_services;
         $this->account_client_services = $account_client_services;
@@ -34,7 +35,7 @@ UpdateAccountClientServices $update_account_client_services , UpdateAccountAdmin
     public function add(AddAccountRequest $request)
     {
         $data = $request->all();
-        if($data['account'] == 0) {
+        if ($data['account'] == 0) {
             $account = $this->account_client_services->add($data);
             if ($account) {
                 Session::flash('success', 'Thêm tài khoản mới thành công');
@@ -43,7 +44,7 @@ UpdateAccountClientServices $update_account_client_services , UpdateAccountAdmin
                 Session::flash('error', 'Đăng ký thất bại');
                 return redirect()->back();
             }
-        }else{
+        } else {
             $account = $this->account_admin_services->add($data);
             if ($account) {
                 Session::flash('success', 'Thêm tài khoản quản trị viên mới thành công');
@@ -55,13 +56,27 @@ UpdateAccountClientServices $update_account_client_services , UpdateAccountAdmin
         }
 
     }
+
     //==================Client==========================
 
-    public function showStudent()
+    public function showStudent(Request $request)
     {
-        $client = Client::orderBy('created_at', 'DECS')->paginate(10);
-//        dd($client);
-        return view('admin.account')->with('client',$client);
+//        dd($request);
+        $query = Client::query();
+        $data = $request->all();
+
+        if(isset($data['search']) && $data['search']){
+            $query->where('name','=',$data['search'])
+                ->orWhere('number_id','=',$data['search'])
+                ->orWhere('email','=', $data['search']);
+            $client = $query->orderBy('created_at', 'DECS')->paginate(10);
+        }else {
+            $client = Client::orderBy('created_at', 'DECS')->paginate(10);
+//            dd($client);
+        }
+
+//        dd($client->isEmpty());
+        return view('admin.account')->with('client', $client);
     }
 
     public function infoClient($id)
@@ -69,15 +84,16 @@ UpdateAccountClientServices $update_account_client_services , UpdateAccountAdmin
 //        dd($id);
         $info_client = Client::find($id);
 //        dd($info_client->subjects);
-        return view('admin.info_client')->with('info_client' , $info_client);
+        return view('admin.info_client')->with('info_client', $info_client);
     }
 
     public function showUpdateClient($id)
     {
         $update_client = Client::find($id);
-        return view('admin.update_client')->with('update_client' , $update_client);
+        return view('admin.update_client')->with('update_client', $update_client);
     }
-    public function updateClient(int $id , UpdateAccountRequest $request)
+
+    public function updateClient(int $id, UpdateAccountRequest $request)
     {
         $user_update = $request->all();
 //        dd($request);
@@ -85,7 +101,7 @@ UpdateAccountClientServices $update_account_client_services , UpdateAccountAdmin
 
         if ($user) {
             Session::flash('success', 'Cập nhật dữ liệu thành công');
-            return redirect()->route('admin.account.update_client',$id);
+            return redirect()->route('admin.account.update_client', $id);
         } else {
             Session::flash('error', 'Cập nhật dữ liệu thất bại thất bại');
             return redirect()->back();
@@ -95,27 +111,42 @@ UpdateAccountClientServices $update_account_client_services , UpdateAccountAdmin
     public function deleteClient(int $id)
     {
         $data_delete = false;
-        try{
+        try {
             $client = Client::find($id);
             $data_delete = $client->delete();
-            if($data_delete) {
+            if ($data_delete) {
                 Session::flash('success', 'Xóa tài khoản người dùng thành công');
                 return redirect()->route('admin.account.showStudent');
             }
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             Session::flash('error', 'Xóa tài khoản thất bại');
             return redirect()->route('admin.account.showStudent');
         }
     }
 
+
+
     //==================End Client==========================
 
     //==================Admin==========================
 
-    public function showTeacher()
+    public function showTeacher(Request $request)
     {
-        $admin = Admin::orderBy('created_at', 'DECS')->paginate(10);
-        return view('admin.account_teacher')->with('admin',$admin);
+        $query = Admin::query();
+        $data = $request->all();
+
+        if(isset($data['search']) && $data['search']){
+            $query->where('name','=',$data['search'])
+                ->orWhere('number_id','=',$data['search'])
+                ->orWhere('email','=', $data['search']);
+            $admin = $query->orderBy('created_at', 'DECS')->paginate(10);
+        }else {
+            $admin = Admin::orderBy('created_at', 'DECS')->paginate(10);
+//            dd($client);
+        }
+
+//        dd($client);
+        return view('admin.account_teacher')->with('admin', $admin);
     }
 
     public function infoAdmin($id)

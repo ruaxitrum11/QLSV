@@ -55,20 +55,32 @@
                 <table class="table" style="text-align: center">
                     <thead>
                     <tr>
-                        @foreach($subject as $data)
+                        @foreach($subjects as $data)
                         <th>Môn {{$data->name}}</th>
                             @endforeach
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
+                        {{--{{$subject}}--}}
+                        @if(!$subject->isEmpty())
                         @foreach($subject as $data)
                             <div class="form-group">
                             <td><input name="score[]" min="0" max="10" type="number" style="text-align: center;border:none;outline: none;font-size: 20px;width: 100%;" value="{{$data->pivot->score}}"></td>
                                 <input hidden name="subject[]" value="{{$data->id}}" type="number" style="text-align: center;border:none;outline: none;font-size: 20px;width: 100%;">
-
                             </div>
                         @endforeach
+                            @else
+                            @foreach($subjects as $data)
+                            <div class="form-group">
+                                <td>
+                                    <input name="score[]" min="0" max="10" type="number" style="text-align: center;border:none;outline: none;font-size: 20px;width: 100%;" value="">
+                                    <input hidden name="subject[]" value="{{$data->id}}" type="number" style="text-align: center;border:none;outline: none;font-size: 20px;width: 100%;">
+                                </td>
+
+                            </div>
+                            @endforeach
+                         @endif
                     </tr>
                     </tbody>
                 </table>

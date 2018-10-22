@@ -82,12 +82,20 @@
                 <button type="submit" class="btn btn-primary">Đăng ký</button>
             </form>
         </div>
+        <form action="{{ route('admin.account.showTeacher') }}" method="get" role="form">
+            {{csrf_field()}}
+            <div class="search-data" style="margin: 20px 0;">
+                <input name="search" type="text" placeholder="Nhập Mã , Email hoặc Tên giảng viên" style="width: 30%">
+                <button style="cursor: pointer;margin-left: 10px;" type="submit">Tìm kiếm</button>
+            </div>
+        </form>
         <div class="card mb-3">
             {{--@php--}}
             {{--dump($errors);--}}
             {{--@endphp--}}
-            @if(!$admin)
-                <p style="margin: 20px 0 20px 30px;">Danh sách tài khoản trống !</p>
+            {{--{{$admin->total}}--}}
+            @if($admin->isEmpty())
+                <p style="margin: 20px 0 20px 30px;">Không tìm thấy tài khoản giảng viên !</p>
             @else
                 <table class="table table-striped" style="text-align: center;margin: 0!important;">
                     <thead>

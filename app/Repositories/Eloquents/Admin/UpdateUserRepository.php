@@ -17,8 +17,6 @@ class UpdateUserRepository
     {
 
         $result = $this->user_model->where('id',$id)->update($data);
-//        dd(4);
-//        dd($result);
         return $result;
 
     }

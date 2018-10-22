@@ -37,6 +37,7 @@ class UpdateAccountAdminServices
 //            dd($destinationPath);
 
             $user_update = [
+                'name' => $request['name'],
                 'email' => $request['email'],
                 'address' => $request['address'],
                 'phone_number' => $request['phone_number'],
@@ -46,6 +47,7 @@ class UpdateAccountAdminServices
             ];
         } else {
             $user_update = [
+                'name' => $request['name'],
                 'email' => $request['email'],
                 'address' => $request['address'],
                 'phone_number' => $request['phone_number'],

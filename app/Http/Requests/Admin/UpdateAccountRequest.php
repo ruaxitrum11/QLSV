@@ -35,6 +35,7 @@ class UpdateAccountRequest extends FormRequest
                 Rule::unique('admins', 'email')->ignore($this->route('id'))
             ],
             'phone_number' => [
+                'required',
                 Rule::unique('clients', 'phone_number')->ignore($this->route('id')),
                 Rule::unique('admins', 'phone_number')->ignore($this->route('id'))
             ],

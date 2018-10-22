@@ -33,7 +33,7 @@
                 <i>:</i>
                 @if(!Auth::user()->phone_number)
                     <span style="font-size: 12px;font-style: italic">Chưa cập nhật</span>
-                    @else  <span>{{Auth::user()->phone_number}}</span>
+                    @else  <span>0{{Auth::user()->phone_number}}</span>
                 @endif
             </li>
             <li>
@@ -52,13 +52,43 @@
                     @else Nữ
                 @endif
             </li>
+            @if(!Auth::user()->subjects->isEmpty())
+            @foreach(Auth::user()->subjects as $data)
+                <li>
+                    <label>Điểm {{$data->name}}</label>
+                    <i>:</i>
+                    <span>{{$data->pivot->score}}</span>
+                </li>
+            @endforeach
+            @else
+                @foreach($subject as $data)
+                    <li>
+                        <label>Điểm {{$data->name}}</label>
+                        <i>:</i>
+                        <span></span>
+                    </li>
+                @endforeach
+            @endif
             <li>
+                @php
+                if(!Auth::user()->subjects->isEmpty()){
+                $total = 0 ;
+                foreach (Auth::user()->subjects as $data){
+                    $total += $data->pivot->score;
+                }
+                $gpa = round($total / count(Auth::user()->subjects),2);
+                }else {
+                $gpa = '';
+                }
+                @endphp
                 <label>Điểm trung bình</label>
                 <i>:</i>
+                <span>{{$gpa}}</span>
             </li>
             <li>
                 <label>Xếp loại</label>
                 <i>:</i>
+                <span>{{Auth::user()->rank}}</span>
             </li>
         </ul>
 

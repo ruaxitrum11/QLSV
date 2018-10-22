@@ -40,6 +40,7 @@ Route::group(['middleware'=>'auth:admin'],function (){
     Route::get('/account/update_client/{id}','Admin\AccountController@showUpdateClient')->name('admin.account.show_update_client');
     Route::put('/account/update_client/{id}','Admin\AccountController@updateClient')->name('admin.account.update_client');
     Route::delete('/account/delete_client/{id}','Admin\AccountController@deleteClient')->name('admin.account.delete_client');
+//    Route::get('/account/search','Admin\AccountController@searchClient')->name('admin.account.search_client');
     //=====================End Client==================
 
     //=====================Admin======================

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Entities\Subject;
 use App\Http\Requests\Client\ClientUpdateRequest;
 use App\Services\Client\UpdateUserServices;
 use Illuminate\Http\Request;
@@ -27,7 +28,8 @@ class HomeController extends Controller
     {
 //        dd(1);
 //        dd($id);
-        return view('/client/home');
+        $subject = Subject::all();
+        return view('/client/home',compact('subject'));
     }
 
 //    public function updateUser(int $id, ClientUpdateRequest $request )

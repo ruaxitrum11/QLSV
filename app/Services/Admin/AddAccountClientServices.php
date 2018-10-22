@@ -37,6 +37,8 @@ class AddAccountClientServices
             'name' => $request['name'],
             'number_id' => $number_id,
             'password' => bcrypt($request['password']),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
         ];
 
         $result = $this->account_repository->store($data);

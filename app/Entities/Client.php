@@ -28,6 +28,17 @@ class Client extends Authenticatable
         'password', 'remember_token',
     ];
 
+//    public function searchUser($query , $search)
+//    {
+//        return $query->where(function($query) use ($search)
+//        {
+//
+//            $query->where('number_id', 'LIKE', "%{$search}%")
+//                ->orWhere('name', 'LIKE', "%{$search}%")
+//                ->orWhere('email', 'LIKE', "%{$search}%");
+//
+//        });
+//    }
 
     public function subjects()
     {
@@ -35,5 +46,6 @@ class Client extends Authenticatable
             ->withPivot('id', 'score')
             ->withTimestamps();
     }
+
 
 }
